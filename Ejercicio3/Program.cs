@@ -14,14 +14,17 @@ namespace Empresa
     {
 
 
-        public static void Main(string[] args)
+        public static void Main()
         {
             Pago_Empleado menu1= new Pago_Empleado();
             Contabilidad menu2=new Contabilidad();
             Detallarsalarios menu3=new Detallarsalarios();
+            Agua menu4=new Agua();
             // menu2.generarconteo();
             //menu1.Generarrecibo();
-            menu3.Registrar();
+            // menu3.Registrar();
+            menu4.Evaluar();
+
             
         }
     }
