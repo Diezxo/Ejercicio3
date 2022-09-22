@@ -6,8 +6,8 @@ hay que sumarle la cantidad de años trabajados multiplicados por $30, y al tota
 esas operaciones restarle el 13% en concepto de descuentos. Imprimir el recibo correspondiente-
 con el nombre, la antigüedad,el valor hora, el total a cobrar en bruto, 
 el total de descuentos y el valor neto a cobrar.*/
-using Aplicacion;
-namespace Aplicacion
+using Empresa;
+namespace Empresa
 {
 
     class Program
@@ -18,7 +18,10 @@ namespace Aplicacion
         {
             Pago_Empleado menu1= new Pago_Empleado();
             Contabilidad menu2=new Contabilidad();
-            menu2.generarconteo();
+            Detallarsalarios menu3=new Detallarsalarios();
+            // menu2.generarconteo();
+            //menu1.Generarrecibo();
+            menu3.Registrar();
             
         }
     }

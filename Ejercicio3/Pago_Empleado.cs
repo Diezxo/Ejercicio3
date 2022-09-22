@@ -4,17 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aplicacion
+namespace Empresa
 {
-    class Pago_Empleado
+    class Pago_Empleado: Empleados
     {
-        public float valor_hora { get; set; }
-        public string? nombre { get; set; }
-        public float antiguedad_años { get; set; }
-        public float horas_mes { get; set; }
-        public float importe_cobrarbruto { get; set; }
-        public float descuento { get; set; }
-        public float importe_total { get; set; }
+        public Pago_Empleado(){}
+        /*public void Empleados(int _id, string? _genero, int _sueldo, float _valor_hora, string? _nombre, float _antiguedad_años, float _horas_mes, float _importe_cobrarbruto, float _descuento, float _importe_total)
+        {
+            id = _id;
+            genero = _genero;
+            sueldo = _sueldo;
+            valor_hora = _valor_hora;
+            nombre = nombre;
+            antiguedad_años = _antiguedad_años;
+            horas_mes = _horas_mes;
+            importe_cobrarbruto = _importe_cobrarbruto;
+            descuento = _descuento;
+            importe_total = _importe_total;
+        }*/
         public void Getrecibo()
         {
 
