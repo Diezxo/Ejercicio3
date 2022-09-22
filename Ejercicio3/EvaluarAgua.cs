@@ -16,10 +16,12 @@ namespace Empresa
 
         public void resultados()
         {
-            Console.WriteLine("                     =======   RESULTADOS     ======                           ");
+            Console.Clear();
+            Console.WriteLine("                 ===========   RESULTADOS    ==========                        ");
             Console.WriteLine("La Mayor cantidad de Agua registrada en un dia fue de: " + gotas_mayor+" mL");
             Console.WriteLine("La menor cantidad de Agua registradas en un dia fue de: " + gotas_menor+" mL");
             Console.WriteLine("El Promedio entre todos los dias evaluados es " + gotas_promedio + " mL de agua");
+            Console.WriteLine("-------------------------------------");
         }
         public void Evaluar()
         {
@@ -53,10 +55,27 @@ namespace Empresa
             if (a == 1)
             {
                 llovizna.resultados();
+                Console.WriteLine("1 Volver a Evaluar / 2 Menu Principal / 0 Finalizar");
+                int b=Convert.ToInt16(Console.ReadLine());
+                if (b == 1)
+                {
+                    Evaluar();
+                }else if (b == 2)
+                {
+                    Program.Main();
+                }
+                else
+                {
+                    Console.WriteLine("Fin");
+                }
             }
             else if(a == 2)
             {
                 Program.Main();
+            }
+            else
+            {
+                Console.WriteLine("Fin");
             }
         }
 
