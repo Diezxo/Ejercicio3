@@ -7,6 +7,8 @@ esas operaciones restarle el 13% en concepto de descuentos. Imprimir el recibo c
 con el nombre, la antigüedad,el valor hora, el total a cobrar en bruto, 
 el total de descuentos y el valor neto a cobrar.*/
 using Empresa;
+using System;
+
 namespace Empresa
 {
 
@@ -16,15 +18,35 @@ namespace Empresa
 
         public static void Main()
         {
-            Pago_Empleado menu1= new Pago_Empleado();
-            Contabilidad menu2=new Contabilidad();
-            Detallarsalarios menu3=new Detallarsalarios();
-            Agua menu4=new Agua();
-            // menu2.generarconteo();
-            //menu1.Generarrecibo();
-            // menu3.Registrar();
-            menu4.Evaluar();
-
+            Console.Clear();
+            Console.WriteLine("           <<<<< Bienvenido >>>>>       ");
+            Console.WriteLine("              Menu de Opciones");
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine("1: Calcular el Resumen de las ventas");
+            Console.WriteLine("2: Calcular el Salario de los empleados");
+            Console.WriteLine("3: Comparar los Salarios entre Hombres y Mujeres");
+            Console.WriteLine("4: (extra) Evaluar la Cantidad de agua caida");
+            Console.WriteLine("0 Finalizar");
+            int res=Convert.ToInt16(Console.ReadLine());
+            switch (res)
+            {
+                case 1:
+                Contabilidad ventas=new Contabilidad();
+                ventas.generarconteo();
+                      break;
+                case 2:
+                Pago_Empleado recibo = new Pago_Empleado();
+                recibo.Generarrecibo();
+                      break;
+                case 3:
+                Detallarsalarios resultado=new Detallarsalarios();
+                resultado.comparar_sueldos();
+                      break;
+                case 4:
+                Agua llovizna=new Agua();
+                llovizna.Evaluar();
+                break;
+            }
             
         }
     }
