@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Empresa;
 namespace Empresa
 {
-    class Detallarsalarios
+    class Detallarsalarios : Funciones
     {
         int Mujeres = 0;
         int Hombres = 0;
@@ -23,7 +23,7 @@ namespace Empresa
             switch (resp)
             {
                 case 1:
-                    comparar_sueldos();
+                    Iniciar();
                     break;
                 case 2:
                     Program.Main();
@@ -33,7 +33,7 @@ namespace Empresa
 
             }
         }
-        public void comparar_sueldos()
+        public void Iniciar()
         {
             Console.Clear();
             Console.WriteLine("Cuantos Empleados desea comparar?");

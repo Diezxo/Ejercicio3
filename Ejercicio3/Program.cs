@@ -12,11 +12,24 @@ using System;
 namespace Empresa
 {
 
-    class Program
+    class Program : Funciones
     {
+        private Funciones? funciones;
 
+        public Program() { }
 
-        public static void Main()
+        public void Getfunciones(Funciones? _funciones)
+        {
+            funciones = _funciones;
+        }
+        public void Iniciar()
+        {
+            if(funciones != null)
+            {
+                funciones.Iniciar();
+            }
+        }
+       /* public void Menuprincipal()
         {
             Console.Clear();
             Console.WriteLine("           <<<<< Bienvenido >>>>>       ");
@@ -27,27 +40,34 @@ namespace Empresa
             Console.WriteLine("3: Comparar los Salarios entre Hombres y Mujeres");
             Console.WriteLine("4: (extra) Evaluar la Cantidad de agua caida");
             Console.WriteLine("0 Finalizar");
-            int res=Convert.ToInt16(Console.ReadLine());
+            int res = Convert.ToInt16(Console.ReadLine());
             switch (res)
             {
                 case 1:
-                Contabilidad ventas=new Contabilidad();
-                ventas.generarconteo();
-                      break;
+                    Contabilidad ventas = new Contabilidad();
+                    ventas.generarconteo();
+                    break;
                 case 2:
-                Pago_Empleado recibo = new Pago_Empleado();
-                recibo.Generarrecibo();
-                      break;
+                    Pago_Empleado recibo = new Pago_Empleado();
+                    recibo.Generarrecibo();
+                    break;
                 case 3:
-                Detallarsalarios resultado=new Detallarsalarios();
-                resultado.comparar_sueldos();
-                      break;
+                    Detallarsalarios resultado = new Detallarsalarios();
+                    resultado.comparar_sueldos();
+                    break;
                 case 4:
-                Agua llovizna=new Agua();
-                llovizna.Evaluar();
-                break;
+                    Agua llovizna = new Agua();
+                    llovizna.Evaluar();
+                    break;
             }
-            
+        }*/
+        public static void Main()
+        {
+            Funciones detallarsalario = new Detallarsalarios();
+            Program iniciador = new Program();
+            iniciador.Getfunciones(detallarsalario);
+            iniciador.Iniciar();
+            //iniciador.Menuprincipal();
         }
     }
     
