@@ -16,12 +16,9 @@ namespace Empresa
     {
         private Funciones? funciones;
 
-        public Program() { }
+        public Program(Funciones _funciones) { funciones = _funciones; }
 
-        public void Getfunciones(Funciones? _funciones)
-        {
-            funciones = _funciones;
-        }
+
         public void Iniciar()
         {
             if(funciones != null)
@@ -64,8 +61,7 @@ namespace Empresa
         public static void Main()
         {
             Funciones detallarsalario = new Detallarsalarios();
-            Program iniciador = new Program();
-            iniciador.Getfunciones(detallarsalario);
+            Program iniciador = new Program(detallarsalario);
             iniciador.Iniciar();
             //iniciador.Menuprincipal();
         }
