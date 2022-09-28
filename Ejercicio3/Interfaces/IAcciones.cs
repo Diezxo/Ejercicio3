@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Empresa;
-namespace Empresa
+
+namespace Empresa.Interfaces
 {
-    internal interface Funciones
+    internal interface IAcciones
     {
-        public void imprimirdetalle() { }
+        
         public void Iniciar() { }
+        public void Detalle() { }
     }
 }

@@ -6,66 +6,70 @@ hay que sumarle la cantidad de años trabajados multiplicados por $30, y al tota
 esas operaciones restarle el 13% en concepto de descuentos. Imprimir el recibo correspondiente-
 con el nombre, la antigüedad,el valor hora, el total a cobrar en bruto, 
 el total de descuentos y el valor neto a cobrar.*/
-using Empresa;
+using Empresa.Interfaces;
 using System;
+using Microsoft.Extensions.DependencyInjection;
+using Empresa.Acciones;
 
 namespace Empresa
 {
 
-    class Program : Funciones
+    class Program
     {
-        private Funciones? funciones;
-
-        public Program(Funciones _funciones) { funciones = _funciones; }
-
-
-        public void Iniciar()
-        {
-            if(funciones != null)
-            {
-                funciones.Iniciar();
-            }
-        }
-       /* public void Menuprincipal()
-        {
-            Console.Clear();
-            Console.WriteLine("           <<<<< Bienvenido >>>>>       ");
-            Console.WriteLine("              Menu de Opciones");
-            Console.WriteLine("------------------------------------------------");
-            Console.WriteLine("1: Calcular el Resumen de las ventas");
-            Console.WriteLine("2: Calcular el Salario de los empleados");
-            Console.WriteLine("3: Comparar los Salarios entre Hombres y Mujeres");
-            Console.WriteLine("4: (extra) Evaluar la Cantidad de agua caida");
-            Console.WriteLine("0 Finalizar");
-            int res = Convert.ToInt16(Console.ReadLine());
-            switch (res)
-            {
-                case 1:
-                    Contabilidad ventas = new Contabilidad();
-                    ventas.generarconteo();
-                    break;
-                case 2:
-                    Pago_Empleado recibo = new Pago_Empleado();
-                    recibo.Generarrecibo();
-                    break;
-                case 3:
-                    Detallarsalarios resultado = new Detallarsalarios();
-                    resultado.comparar_sueldos();
-                    break;
-                case 4:
-                    Agua llovizna = new Agua();
-                    llovizna.Evaluar();
-                    break;
-            }
-        }*/
+       
         public static void Main()
         {
-            Funciones detallarsalario = new Detallarsalarios();
-            Program iniciador = new Program(detallarsalario);
-            iniciador.Iniciar();
-            //iniciador.Menuprincipal();
+            /* IDetallarSalarios detallarsalario = new Detallarsalarios();
+             detallarsalario.Iniciar();*/
+
+            var services= new ServiceCollection();
+              services.AddSingleton<IMenu, Menu>();
+            
+            var serviceProvider = services.BuildServiceProvider();
+            var iniciador = serviceProvider.GetService<IMenu>();
+             char? o;
+
+            do { iniciador.Menuprincipal();
+
+              o= Convert.ToChar(Console.ReadLine());
+                switch (o) // Bucle para implementarle funciones a la Interface
+                {
+                    case '1':
+                        services.AddScoped<IAcciones, Calcular>();
+                        break;
+                    case '2':
+                        services.AddScoped<IAcciones, Pago_Empleado>();
+                        break;
+                    case '3':
+                        services.AddScoped<IAcciones, Detallarsalarios>();
+                        break;
+                    case '4':
+                        services.AddScoped<IAcciones, Agua>();
+                        break;
+                    default:
+                        services.AddScoped<IAcciones, Fin>();
+                        break;
+                        
+                }
+                if (o != '1' && o != '2' && o != '3' && o != '4' && o!='0')
+                {
+                    Console.Clear();
+                    Console.WriteLine("         ¡Ingrese una accion Valida!");
+                }
+
+            } while (o != '1' && o != '2' && o != '3' && o != '4' && o!='0');
+
+             var serviceProvider2= services.BuildServiceProvider();
+            var iniciador2 = serviceProvider2.GetService<IAcciones>();
+            iniciador2.Iniciar();
+            //services.AddScoped<IAcciones, Detallarsalarios>();          
+
+
+
+
+
+
         }
     }
     
 }
-

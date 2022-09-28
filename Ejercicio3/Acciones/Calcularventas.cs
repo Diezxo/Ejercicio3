@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Empresa.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Empresa;
-namespace Empresa
+
+namespace Empresa.Acciones
 {
     class Producto
     {
@@ -26,9 +27,27 @@ namespace Empresa
             return nombre;
         }
     }
-    class Contabilidad
+    class Calcular: IAcciones
     {
-        public void generarconteo()
+        float ventas_brutas = 0;
+        float ventas_con_descuentos = 0;
+        float ventas_totales = 0;
+        const float impuesto = 0.18f;
+       
+        float descuento = 0;
+        public void Detalle()
+        {
+            Console.Clear();
+            Console.WriteLine("    ======       DETALLE       ======");
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("El descuento de la venta fue: " + descuento);
+            Console.WriteLine("Tus ventas brutas fueron: " + ventas_brutas);
+            Console.WriteLine("Tus ventas generaron un impuesto del 18%");
+            Console.WriteLine("Tus ventas finales fueron de: " + ventas_totales);
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine("1 Recalcular / 2 Menu Principal / 0 Finalizar");
+        }
+        public void Iniciar()
         {
             Console.Clear();
             Console.WriteLine("Cuantos productos deseas Registrar");
@@ -44,12 +63,7 @@ namespace Empresa
                 Console.WriteLine();
             }
 
-            float ventas_brutas = 0;
-            float ventas_con_descuentos = 0;
-            float ventas_totales = 0;
-            const float impuesto = 0.18f;
             float valor_impuesto = ventas_brutas * impuesto;
-            float descuento = 0;
 
             for (int i = 0; i < cantidadproductos; i++)
             {
@@ -58,54 +72,49 @@ namespace Empresa
 
             Console.WriteLine("se aplico algun descuento?");
             Console.WriteLine("1 Si / 0 No");
-            int Respuesta =Convert.ToInt16(Console.ReadLine());
+            int Respuesta = Convert.ToInt16(Console.ReadLine());
             if (Respuesta == 1)
-            {   Console.Clear();
+            {
+                Console.Clear();
                 Console.WriteLine("De cuanto fue el descuento en porcentaje?");
                 Console.WriteLine("Referencia: 10%=0.10");
                 descuento = ventas_brutas * (float)Convert.ToDouble(Console.ReadLine());
-                ventas_con_descuentos = ventas_brutas - (descuento);
-                ventas_totales = ventas_con_descuentos + (ventas_con_descuentos * impuesto);
+                ventas_con_descuentos = ventas_brutas - descuento;
+                ventas_totales = ventas_con_descuentos + ventas_con_descuentos * impuesto;
             }
             else if (Respuesta == 0)
             {
                 descuento = 0;
-                ventas_totales = ventas_brutas + (ventas_brutas * impuesto);
+                ventas_totales = ventas_brutas + ventas_brutas * impuesto;
             }
             Console.Clear();
             Console.WriteLine("1 Imprimir Detalle / 2 Menu Principal / 0 Finalizar");
             int r = Convert.ToInt16(Console.ReadLine());
             if (r == 1)
             {
-                Console.Clear();
-                Console.WriteLine("    ======       DETALLE       ======");
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine("El descuento de la venta fue: " + descuento);
-                Console.WriteLine("Tus ventas brutas fueron: " + ventas_brutas);
-                Console.WriteLine("Tus ventas generaron un impuesto del 18%");
-                Console.WriteLine("Tus ventas finales fueron de: " + ventas_totales);
-                Console.WriteLine("------------------------------------------");
-                Console.WriteLine("1 Recalcular / 2 Menu Principal / 0 Finalizar");
-                int resp= Convert.ToInt16(Console.ReadLine());
+               Detalle();
+                int resp = Convert.ToInt16(Console.ReadLine());
                 switch (resp)
                 {
+                   
                     case 1:
-                    generarconteo();
-                    break;
-                          case 2:
-                          Program.Main();
-                          break;
-                                case 0:
-                                Console.Clear();
-                                break;
+                        Iniciar();
+                        break;
+                    case 2:
+                        Program.Main();
+                        break;
+                    case 0:
+                        Fin.Iniciar();
+                        break;
 
                 }
             }
             if (r == 2)
             {
                 Program.Main();
-            }else if (r == 0)
-            {}
+            }
+            else if (r == 0)
+            { }
 
 
 

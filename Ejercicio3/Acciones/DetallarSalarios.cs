@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Empresa;
-namespace Empresa
+using Empresa.Interfaces;
+
+namespace Empresa.Acciones
 {
-    class Detallarsalarios : Funciones
+    class Detallarsalarios : IAcciones
     {
         int Mujeres = 0;
         int Hombres = 0;
-        public void imprimirdetalle()
+        public void Detalle ()
         {
             Console.Clear();
             Console.WriteLine("                 >>>>   Resultado   <<<<");
-            Console.WriteLine("En la Empresa hay "+Mujeres+" Mujeres con sueldos arriba de 500 Dolares");
+            Console.WriteLine("En la Empresa hay " + Mujeres + " Mujeres con sueldos arriba de 500 Dolares");
             Console.WriteLine("Hay " + Hombres + " Hombres ganando menos de 400 Dolares en la empresa");
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine("1 Recalcular / 2 Menu Principal / 0 Finalizar");
@@ -29,6 +30,7 @@ namespace Empresa
                     Program.Main();
                     break;
                 case 0:
+                    Fin.Iniciar();
                     break;
 
             }
@@ -40,10 +42,11 @@ namespace Empresa
             int Respuesta = Convert.ToInt32(Console.ReadLine());
             Empleados[] e = new Empleados[Respuesta];
             for (int i = 0; i < Respuesta; i++)
-            {   Console.Clear();
+            {
+                Console.Clear();
                 Console.WriteLine("Empleado N/" + (1 + i));
                 Console.WriteLine("---------------------");
-                int id = (01 + i);
+                int id = 01 + i;
                 Console.WriteLine("Ingrese el Nombre");
                 var nombre = Console.ReadLine();
                 Console.WriteLine("----------------");
@@ -73,9 +76,9 @@ namespace Empresa
                 if (e[i].getSueldo() <= 400 && e[i].getGenero() == "Hombre")
                 {
                     Hombres++;
-                }             
+                }
             }
-             imprimirdetalle();
+            Detalle();
         }
     }
 }

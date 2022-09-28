@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Empresa.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Empresa;
-namespace Empresa
+
+namespace Empresa.Acciones
 {
-    class Agua
+    class Agua: IAcciones
     {
         public int gotas_dia { get; set; }
         public int gotas_promedio { get; set; }
@@ -14,16 +15,16 @@ namespace Empresa
         public int gotas_mayor { get; set; }
         public int dias_evaluados { get; set; }
 
-        public void resultados()
+        public void Detalle()
         {
             Console.Clear();
             Console.WriteLine("              ===========   RESULTADOS   ==========                    ");
-            Console.WriteLine("La Mayor cantidad de Agua registrada en un dia fue de: " + gotas_mayor+" mL");
-            Console.WriteLine("La menor cantidad de Agua registradas en un dia fue de: " + gotas_menor+" mL");
+            Console.WriteLine("La Mayor cantidad de Agua registrada en un dia fue de: " + gotas_mayor + " mL");
+            Console.WriteLine("La menor cantidad de Agua registradas en un dia fue de: " + gotas_menor + " mL");
             Console.WriteLine("El Promedio entre todos los dias evaluados es " + gotas_promedio + " mL de agua");
             Console.WriteLine("-------------------------------------");
         }
-        public void Evaluar()
+        public void Iniciar()
         {
             Console.Clear();
             Console.WriteLine("Cuantos dias deseas evaluar");
@@ -55,28 +56,30 @@ namespace Empresa
             int a = Convert.ToInt16(Console.ReadLine());
             if (a == 1)
             {
-                llovizna.resultados();
+                llovizna.Detalle();
 
                 Console.WriteLine("1 Volver a Evaluar / 2 Menu Principal / 0 Finalizar");
                 int b = Convert.ToInt16(Console.ReadLine());
-                switch (b) {
+                switch (b)
+                {
                     case 1:
-                    Evaluar();
-                         break;
+                        Iniciar();
+                        break;
                     case 2:
-                     Program.Main();
-                               break;
+                        Program.Main();
+                        break;
                     case 0:
                         Console.Clear();
-                        Console.WriteLine("Fin");
-                                       break;
-                }           
-            }else if(a == 2)
+                        Fin.Iniciar();
+                        break;
+                }
+            }
+            else if (a == 2)
             {
                 Program.Main();
             }
             else
-            {}
+            { Fin.Iniciar(); }
         }
 
 

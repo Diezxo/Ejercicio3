@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Empresa.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Empresa
+namespace Empresa.Acciones
 {
-    class Pago_Empleado: Empleados
+    internal class Pago_Empleado : Empleados, IAcciones
     {
-        public Pago_Empleado(){}
+        public Pago_Empleado() { }
         /*public void Empleados(int _id, string? _genero, int _sueldo, float _valor_hora, string? _nombre, float _antiguedad_años, float _horas_mes, float _importe_cobrarbruto, float _descuento, float _importe_total)
         {
             id = _id;
@@ -22,7 +23,16 @@ namespace Empresa
             descuento = _descuento;
             importe_total = _importe_total;
         }*/
-        public void Getrecibo()
+        public void Calcular()
+        {
+            float importe_subtotal = valor_hora * horas_mes;
+            float liquidacion = antiguedad_años * 30;
+            importe_cobrarbruto = importe_subtotal + liquidacion;
+            const float cons = 0.13F;
+            descuento = importe_cobrarbruto * cons;
+            importe_total = importe_cobrarbruto - descuento;
+        }
+        public void Detalle()
         {
             Console.Clear();
             Console.WriteLine("         =======       RECIBO       =======");
@@ -39,7 +49,7 @@ namespace Empresa
             switch (resp)
             {
                 case 1:
-                    Generarrecibo();
+                    Iniciar();
                     break;
                 case 2:
                     Program.Main();
@@ -50,43 +60,37 @@ namespace Empresa
 
             }
         }
-           public void Generarrecibo()
-            {
-                for (int i = 0; i < 1; i++)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Cuanto es el valor por hora que devenga el empleado");
-                    valor_hora = (float)Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("Cual es el nombre del empleado?");
-                    nombre = Console.ReadLine();
-                    Console.WriteLine("Cuantos años lleva en la empresa");
-                    antiguedad_años = (float)Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("Cuantas horas trabajo en el mes?");
-                    horas_mes = (float)Convert.ToDouble(Console.ReadLine());
-
-                }
-                float importe_subtotal = valor_hora * horas_mes;
-                float liquidacion = antiguedad_años * 30;
-                importe_cobrarbruto = importe_subtotal + liquidacion;
-                const float cons = 0.13F;
-                descuento = importe_cobrarbruto * cons;
-                importe_total = importe_cobrarbruto - descuento;
+        public void Iniciar()
+        {
+            for (int i = 0; i < 1; i++)
+            { 
                 Console.Clear();
-                Console.WriteLine("Presione: 1 Imprimir el Recibo / 2 Menu Principal / 0 Finalizar");
-                int Res = Convert.ToInt32(Console.ReadLine());
-                if (Res == 1)
-                {
-                 Getrecibo();
-                }
-                else if(Res == 2)
-                {
-                 Program.Main();
-                }  
-            
+                Console.WriteLine("Cuanto es el valor por hora que devenga el empleado");
+                valor_hora = (float)Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Cual es el nombre del empleado?");
+                nombre = Console.ReadLine();
+                Console.WriteLine("Cuantos años lleva en la empresa");
+                antiguedad_años = (float)Convert.ToDouble(Console.ReadLine());
+                Console.WriteLine("Cuantas horas trabajo en el mes?");
+                horas_mes = (float)Convert.ToDouble(Console.ReadLine());
+            }
+            Calcular();
+            Console.Clear();
+            Console.WriteLine("Presione: 1 Imprimir el Recibo / 2 Menu Principal / 0 Finalizar");
+            int Res = Convert.ToInt32(Console.ReadLine());
+            if (Res == 1)
+            {
+                Detalle();
+            }
+            else if (Res == 2)
+            {
+                Program.Main();
+            }
+
         }
     }
 }
 
 
-    
+
 
